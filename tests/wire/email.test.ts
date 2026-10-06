@@ -15,6 +15,7 @@ describe("EmailClient", () => {
                 breach: [{ name: "Example 2021", date: "2021-04-02" }],
                 api: [{ key: "value" }],
             },
+            _meta: { plan: "investigator", lookups_left: 739 },
         };
 
         server.mockEndpoint().get("/api/email-osint").respondWith().statusCode(200).jsonBody(rawResponseBody).build();

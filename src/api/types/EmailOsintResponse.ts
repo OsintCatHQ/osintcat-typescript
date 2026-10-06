@@ -7,6 +7,7 @@ import type * as OsintCat from "../index.js";
  */
 export interface EmailOsintResponse {
     results?: OsintCat.EmailOsintResults | undefined;
+    _meta?: OsintCat.UsageMeta | undefined;
     /** Accepts any additional properties */
     [key: string]: any;
 }
