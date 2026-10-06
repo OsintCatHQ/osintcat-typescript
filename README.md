@@ -118,6 +118,8 @@ Version 2 is a new SDK, generated from the same description of the API as the [d
 - Methods are grouped by subject (`client.breach.search()`, `client.github.profile()`), and every documented endpoint is included.
 - Methods for endpoints that no longer exist are gone.
 
+Source code: [github.com/OsintCatHQ/osintcat-typescript](https://github.com/OsintCatHQ/osintcat-typescript). Issues are welcome there.
+
 ## Links
 
 - [API documentation](https://docs.osintcat.net)

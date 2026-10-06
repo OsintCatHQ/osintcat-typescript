@@ -1,7 +1,8 @@
 import { defineConfig } from "tsup";
 
 // One minified file per module format; type declarations come from tsc (package.json "build").
-// No source maps: the source is not published. keepNames keeps error class names readable in logs.
+// Minified to keep the package small; the readable source is on GitHub. keepNames keeps error class
+// names readable in logs.
 export default defineConfig({
     entry: { index: "src/index.ts" },
     format: ["esm", "cjs"],
