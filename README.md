@@ -65,6 +65,13 @@ Fields that differ between records (breach records, for example) are kept as the
 | `client.vin.query()` | [`GET /api/vin`](https://docs.osintcat.net/api-reference/endpoint/vin) | VIN Decoder |
 | `client.chile.person()` | [`GET /api/chilean-name`](https://docs.osintcat.net/api-reference/endpoint/chilean-name) | Chilean Person Search |
 | `client.chile.vehicle()` | [`GET /api/chilean-car`](https://docs.osintcat.net/api-reference/endpoint/chilean-car) | Chilean Vehicle Search |
+| `client.machineViewer.stats()` | [`GET /api/machine_viewer/stats`](https://docs.osintcat.net/api-reference/endpoint/machine-viewer) | Machine Viewer statistics |
+| `client.machineViewer.search()` | [`GET /api/machine_viewer/search`](https://docs.osintcat.net/api-reference/endpoint/machine-viewer) | Search machines |
+| `client.machineViewer.machine()` | [`GET /api/machine_viewer/machines/{machine_id}/info`](https://docs.osintcat.net/api-reference/endpoint/machine-viewer) | Machine details |
+| `client.machineViewer.files()` | [`GET /api/machine_viewer/machines/{machine_id}/files/treeview`](https://docs.osintcat.net/api-reference/endpoint/machine-viewer) | Machine files |
+| `client.machineViewer.file()` | [`GET /api/machine_viewer/files/{file_id}/info`](https://docs.osintcat.net/api-reference/endpoint/machine-viewer) | File content |
+| `client.machineViewer.downloadFile()` | [`GET /api/machine_viewer/files/{file_id}/download`](https://docs.osintcat.net/api-reference/endpoint/machine-viewer) | Download a file |
+| `client.machineViewer.downloadMachine()` | [`GET /api/machine_viewer/machines/{machine_id}/download`](https://docs.osintcat.net/api-reference/endpoint/machine-viewer) | Download a machine |
 
 ## Errors
 

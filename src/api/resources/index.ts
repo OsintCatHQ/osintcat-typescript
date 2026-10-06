@@ -16,6 +16,8 @@ export * from "./instagram/client/requests/index.js";
 export * as instagram from "./instagram/index.js";
 export * from "./ip/client/requests/index.js";
 export * as ip from "./ip/index.js";
+export * from "./machineViewer/client/requests/index.js";
+export * as machineViewer from "./machineViewer/index.js";
 export * from "./minecraft/client/requests/index.js";
 export * as minecraft from "./minecraft/index.js";
 export * from "./minecraft/types/index.js";

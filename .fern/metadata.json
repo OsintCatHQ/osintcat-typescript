@@ -18,9 +18,9 @@
         "maxRetries": 0,
         "defaultTimeout": 60000
     },
-    "originGitCommit": "cdbee9e35547ae2cfd12671f5d490e464c8b5f46",
+    "originGitCommit": "792dc6cbf32f5af883707d156ec75ed19ef0a207",
     "originGitCommitIsDirty": true,
     "invokedBy": "manual",
-    "requestedVersion": "2.0.0",
-    "sdkVersion": "2.0.0"
+    "requestedVersion": "2.1.0",
+    "sdkVersion": "2.1.0"
 }

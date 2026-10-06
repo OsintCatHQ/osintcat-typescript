@@ -9,6 +9,7 @@ import { EmailClient } from "./api/resources/email/client/Client.js";
 import { GithubClient } from "./api/resources/github/client/Client.js";
 import { InstagramClient } from "./api/resources/instagram/client/Client.js";
 import { IpClient } from "./api/resources/ip/client/Client.js";
+import { MachineViewerClient } from "./api/resources/machineViewer/client/Client.js";
 import { MinecraftClient } from "./api/resources/minecraft/client/Client.js";
 import { PhoneClient } from "./api/resources/phone/client/Client.js";
 import { RedditClient } from "./api/resources/reddit/client/Client.js";
@@ -48,6 +49,7 @@ export class OsintCatClient {
     protected _instagram: InstagramClient | undefined;
     protected _vin: VinClient | undefined;
     protected _chile: ChileClient | undefined;
+    protected _machineViewer: MachineViewerClient | undefined;
 
     constructor(options: OsintCatClient.Options = {}) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -123,6 +125,10 @@ export class OsintCatClient {
 
     public get chile(): ChileClient {
         return (this._chile ??= new ChileClient(this._options));
+    }
+
+    public get machineViewer(): MachineViewerClient {
+        return (this._machineViewer ??= new MachineViewerClient(this._options));
     }
 
     /**
