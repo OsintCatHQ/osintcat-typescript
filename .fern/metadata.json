@@ -1,0 +1,30 @@
+{
+    "cliVersion": "5.112.0",
+    "generatorName": "fernapi/fern-typescript-sdk",
+    "generatorVersion": "3.80.1",
+    "generatorConfig": {
+        "namespaceExport": "OsintCat",
+        "packageJson": {
+            "name": "osintcat",
+            "description": "Official SDK for the OsintCat API",
+            "license": "MIT",
+            "author": "OsintCat <support@osintcat.net>",
+            "homepage": "https://docs.osintcat.net",
+            "repository": {
+                "type": "git",
+                "url": "git+https://github.com/OsintCatHQ/OsintCat.js.git"
+            },
+            "bugs": "https://github.com/OsintCatHQ/OsintCat.js/issues",
+            "keywords": ["osintcat", "osint", "api", "sdk"]
+        },
+        "skipResponseValidation": true,
+        "fetchSupport": "native",
+        "omitUndefined": true,
+        "maxRetries": 0,
+        "defaultTimeout": 60000
+    },
+    "originGitCommitIsDirty": true,
+    "invokedBy": "manual",
+    "requestedVersion": "2.0.0",
+    "sdkVersion": "2.0.0"
+}
