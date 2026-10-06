@@ -40,6 +40,7 @@ export class VinClient {
      * @throws {@link OsintCat.BadRequestError}
      * @throws {@link OsintCat.UnauthorizedError}
      * @throws {@link OsintCat.ForbiddenError}
+     * @throws {@link OsintCat.FailedDependencyError}
      * @throws {@link OsintCat.TooManyRequestsError}
      *
      * @example
@@ -50,14 +51,14 @@ export class VinClient {
     public query(
         request: OsintCat.QueryVinRequest = {},
         requestOptions?: VinClient.RequestOptions,
-    ): core.HttpResponsePromise<OsintCat.VinResponse> {
+    ): core.HttpResponsePromise<OsintCat.VinResponse | undefined> {
         return core.HttpResponsePromise.fromPromise(this.__query(request, requestOptions));
     }
 
     private async __query(
         request: OsintCat.QueryVinRequest = {},
         requestOptions?: VinClient.RequestOptions,
-    ): Promise<core.WithRawResponse<OsintCat.VinResponse>> {
+    ): Promise<core.WithRawResponse<OsintCat.VinResponse | undefined>> {
         const {
             type: operation,
             query,
@@ -119,7 +120,7 @@ export class VinClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as OsintCat.VinResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as OsintCat.VinResponse | undefined, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -130,6 +131,11 @@ export class VinClient {
                     throw new OsintCat.UnauthorizedError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 case 403:
                     throw new OsintCat.ForbiddenError(_response.error.body as OsintCat.Error, _response.rawResponse);
+                case 424:
+                    throw new OsintCat.FailedDependencyError(
+                        _response.error.body as OsintCat.Error,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new OsintCat.TooManyRequestsError(
                         _response.error.body as OsintCat.Error,

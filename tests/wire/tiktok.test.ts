@@ -124,7 +124,7 @@ describe("TiktokClient", () => {
             .mockEndpoint()
             .get("/api/tiktok-resolver")
             .respondWith()
-            .statusCode(429)
+            .statusCode(424)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -132,7 +132,7 @@ describe("TiktokClient", () => {
             return await client.tiktok.resolveShareLink({
                 link: "link",
             });
-        }).rejects.toThrow(OsintCat.TooManyRequestsError);
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
     });
 
     test("resolveShareLink (7)", async () => {
@@ -145,7 +145,7 @@ describe("TiktokClient", () => {
             .mockEndpoint()
             .get("/api/tiktok-resolver")
             .respondWith()
-            .statusCode(502)
+            .statusCode(429)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -153,6 +153,6 @@ describe("TiktokClient", () => {
             return await client.tiktok.resolveShareLink({
                 link: "link",
             });
-        }).rejects.toThrow(OsintCat.BadGatewayError);
+        }).rejects.toThrow(OsintCat.TooManyRequestsError);
     });
 });

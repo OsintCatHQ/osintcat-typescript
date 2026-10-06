@@ -96,14 +96,14 @@ describe("EmailClient", () => {
 
         const rawResponseBody = {};
 
-        server.mockEndpoint().get("/api/email-osint").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().get("/api/email-osint").respondWith().statusCode(424).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.email.lookup({
                 query: "query",
                 purpose: "purpose",
             });
-        }).rejects.toThrow(OsintCat.TooManyRequestsError);
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
     });
 
     test("lookup (7)", async () => {
@@ -112,13 +112,13 @@ describe("EmailClient", () => {
 
         const rawResponseBody = {};
 
-        server.mockEndpoint().get("/api/email-osint").respondWith().statusCode(502).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().get("/api/email-osint").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.email.lookup({
                 query: "query",
                 purpose: "purpose",
             });
-        }).rejects.toThrow(OsintCat.BadGatewayError);
+        }).rejects.toThrow(OsintCat.TooManyRequestsError);
     });
 });

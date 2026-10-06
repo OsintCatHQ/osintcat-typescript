@@ -38,6 +38,7 @@ export class RedditClient {
      * @throws {@link OsintCat.BadRequestError}
      * @throws {@link OsintCat.UnauthorizedError}
      * @throws {@link OsintCat.ForbiddenError}
+     * @throws {@link OsintCat.FailedDependencyError}
      * @throws {@link OsintCat.TooManyRequestsError}
      *
      * @example
@@ -98,6 +99,11 @@ export class RedditClient {
                     throw new OsintCat.UnauthorizedError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 case 403:
                     throw new OsintCat.ForbiddenError(_response.error.body as OsintCat.Error, _response.rawResponse);
+                case 424:
+                    throw new OsintCat.FailedDependencyError(
+                        _response.error.body as OsintCat.Error,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new OsintCat.TooManyRequestsError(
                         _response.error.body as OsintCat.Error,

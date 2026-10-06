@@ -84,13 +84,13 @@ describe("PhoneClient", () => {
 
         const rawResponseBody = {};
 
-        server.mockEndpoint().get("/api/phone-osint").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().get("/api/phone-osint").respondWith().statusCode(424).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.phone.lookup({
                 query: "query",
             });
-        }).rejects.toThrow(OsintCat.TooManyRequestsError);
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
     });
 
     test("lookup (6)", async () => {
@@ -99,27 +99,12 @@ describe("PhoneClient", () => {
 
         const rawResponseBody = {};
 
-        server.mockEndpoint().get("/api/phone-osint").respondWith().statusCode(502).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().get("/api/phone-osint").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.phone.lookup({
                 query: "query",
             });
-        }).rejects.toThrow(OsintCat.BadGatewayError);
-    });
-
-    test("lookup (7)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new OsintCatClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-
-        const rawResponseBody = {};
-
-        server.mockEndpoint().get("/api/phone-osint").respondWith().statusCode(504).jsonBody(rawResponseBody).build();
-
-        await expect(async () => {
-            return await client.phone.lookup({
-                query: "query",
-            });
-        }).rejects.toThrow(OsintCat.GatewayTimeoutError);
+        }).rejects.toThrow(OsintCat.TooManyRequestsError);
     });
 });

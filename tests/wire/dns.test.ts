@@ -55,6 +55,21 @@ describe("DnsClient", () => {
 
         const rawResponseBody = {};
 
+        server.mockEndpoint().get("/api/dns-resolver").respondWith().statusCode(424).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.dns.resolve({
+                query: "query",
+            });
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
+    });
+
+    test("resolve (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new OsintCatClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {};
+
         server.mockEndpoint().get("/api/dns-resolver").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
 
         await expect(async () => {

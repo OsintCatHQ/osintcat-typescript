@@ -30,7 +30,7 @@ export class InstagramClient {
      * Errors:
      * - 400 `Provide a valid Instagram URL via ?link=...`: No link, not an Instagram link, or the link expired or points to a private post. Not charged.
      * - 422 `profile_link`: A profile link: only post and reel share links can be resolved. Not charged.
-     * - 502 `(message)`: The link could not be resolved right now. Not charged.
+     * - 424 `(message)`: The link could not be resolved right now. Not charged.
      *
      * Docs: https://docs.osintcat.net/api-reference/endpoint/instagram-resolver
      *
@@ -41,8 +41,8 @@ export class InstagramClient {
      * @throws {@link OsintCat.UnauthorizedError}
      * @throws {@link OsintCat.ForbiddenError}
      * @throws {@link OsintCat.UnprocessableEntityError}
+     * @throws {@link OsintCat.FailedDependencyError}
      * @throws {@link OsintCat.TooManyRequestsError}
-     * @throws {@link OsintCat.BadGatewayError}
      *
      * @example
      *     await client.instagram.resolveShareLink({
@@ -107,13 +107,16 @@ export class InstagramClient {
                         _response.error.body as OsintCat.Error,
                         _response.rawResponse,
                     );
+                case 424:
+                    throw new OsintCat.FailedDependencyError(
+                        _response.error.body as OsintCat.Error,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new OsintCat.TooManyRequestsError(
                         _response.error.body as OsintCat.Error,
                         _response.rawResponse,
                     );
-                case 502:
-                    throw new OsintCat.BadGatewayError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 default:
                     throw new errors.OsintCatError({
                         statusCode: _response.error.statusCode,

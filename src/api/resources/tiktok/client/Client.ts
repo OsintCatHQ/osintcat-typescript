@@ -30,7 +30,7 @@ export class TiktokClient {
      * Errors:
      * - 400 `Provide a valid TikTok short link via ?link=...`: No link, or not a TikTok link.
      * - 404 `No user found for this link`: The link carries no sharer.
-     * - 502 `Could not resolve link`: The link could not be resolved right now.
+     * - 424 `Could not resolve link`: The link could not be resolved right now.
      *
      * Docs: https://docs.osintcat.net/api-reference/endpoint/tiktok-resolver
      *
@@ -41,8 +41,8 @@ export class TiktokClient {
      * @throws {@link OsintCat.UnauthorizedError}
      * @throws {@link OsintCat.ForbiddenError}
      * @throws {@link OsintCat.NotFoundError}
+     * @throws {@link OsintCat.FailedDependencyError}
      * @throws {@link OsintCat.TooManyRequestsError}
-     * @throws {@link OsintCat.BadGatewayError}
      *
      * @example
      *     await client.tiktok.resolveShareLink({
@@ -104,13 +104,16 @@ export class TiktokClient {
                     throw new OsintCat.ForbiddenError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 case 404:
                     throw new OsintCat.NotFoundError(_response.error.body as OsintCat.Error, _response.rawResponse);
+                case 424:
+                    throw new OsintCat.FailedDependencyError(
+                        _response.error.body as OsintCat.Error,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new OsintCat.TooManyRequestsError(
                         _response.error.body as OsintCat.Error,
                         _response.rawResponse,
                     );
-                case 502:
-                    throw new OsintCat.BadGatewayError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 default:
                     throw new errors.OsintCatError({
                         statusCode: _response.error.statusCode,

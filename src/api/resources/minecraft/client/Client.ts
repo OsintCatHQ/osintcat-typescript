@@ -34,6 +34,7 @@ export class MinecraftClient {
      *
      * @throws {@link OsintCat.UnauthorizedError}
      * @throws {@link OsintCat.ForbiddenError}
+     * @throws {@link OsintCat.FailedDependencyError}
      * @throws {@link OsintCat.TooManyRequestsError}
      *
      * @example
@@ -93,6 +94,11 @@ export class MinecraftClient {
                     throw new OsintCat.UnauthorizedError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 case 403:
                     throw new OsintCat.ForbiddenError(_response.error.body as OsintCat.Error, _response.rawResponse);
+                case 424:
+                    throw new OsintCat.FailedDependencyError(
+                        _response.error.body as OsintCat.Error,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new OsintCat.TooManyRequestsError(
                         _response.error.body as OsintCat.Error,
@@ -117,7 +123,7 @@ export class MinecraftClient {
      *
      * Errors:
      * - 400 `invalid query type`: `type` is missing or not one of the allowed values; `allowed_types` lists them.
-     * - 502 `Upstream returned an empty response`: The search could not be completed; the response carries an `error_id`.
+     * - 424 `Upstream returned an empty response`: The search could not be completed; the response carries an `error_id`.
      *
      * Docs: https://docs.osintcat.net/api-reference/endpoint/minecraft-osint
      *
@@ -127,8 +133,8 @@ export class MinecraftClient {
      * @throws {@link OsintCat.BadRequestError}
      * @throws {@link OsintCat.UnauthorizedError}
      * @throws {@link OsintCat.ForbiddenError}
+     * @throws {@link OsintCat.FailedDependencyError}
      * @throws {@link OsintCat.TooManyRequestsError}
-     * @throws {@link OsintCat.BadGatewayError}
      *
      * @example
      *     await client.minecraft.leaks({
@@ -193,13 +199,16 @@ export class MinecraftClient {
                     throw new OsintCat.UnauthorizedError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 case 403:
                     throw new OsintCat.ForbiddenError(_response.error.body as OsintCat.Error, _response.rawResponse);
+                case 424:
+                    throw new OsintCat.FailedDependencyError(
+                        _response.error.body as OsintCat.Error,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new OsintCat.TooManyRequestsError(
                         _response.error.body as OsintCat.Error,
                         _response.rawResponse,
                     );
-                case 502:
-                    throw new OsintCat.BadGatewayError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 default:
                     throw new errors.OsintCatError({
                         statusCode: _response.error.statusCode,
@@ -228,6 +237,7 @@ export class MinecraftClient {
      * @throws {@link OsintCat.BadRequestError}
      * @throws {@link OsintCat.UnauthorizedError}
      * @throws {@link OsintCat.ForbiddenError}
+     * @throws {@link OsintCat.FailedDependencyError}
      * @throws {@link OsintCat.TooManyRequestsError}
      *
      * @example
@@ -288,6 +298,11 @@ export class MinecraftClient {
                     throw new OsintCat.UnauthorizedError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 case 403:
                     throw new OsintCat.ForbiddenError(_response.error.body as OsintCat.Error, _response.rawResponse);
+                case 424:
+                    throw new OsintCat.FailedDependencyError(
+                        _response.error.body as OsintCat.Error,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new OsintCat.TooManyRequestsError(
                         _response.error.body as OsintCat.Error,

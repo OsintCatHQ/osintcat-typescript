@@ -36,6 +36,7 @@ export class BreachClient {
      *
      * @throws {@link OsintCat.UnauthorizedError}
      * @throws {@link OsintCat.ForbiddenError}
+     * @throws {@link OsintCat.FailedDependencyError}
      * @throws {@link OsintCat.TooManyRequestsError}
      *
      * @example
@@ -94,6 +95,11 @@ export class BreachClient {
                     throw new OsintCat.UnauthorizedError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 case 403:
                     throw new OsintCat.ForbiddenError(_response.error.body as OsintCat.Error, _response.rawResponse);
+                case 424:
+                    throw new OsintCat.FailedDependencyError(
+                        _response.error.body as OsintCat.Error,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new OsintCat.TooManyRequestsError(
                         _response.error.body as OsintCat.Error,
@@ -117,8 +123,8 @@ export class BreachClient {
      * Counts as one lookup against your plan's daily allowance (Max: unlimited). When the allowance is used up, the lookup can continue at a per-lookup price charged to your balance (the module's page in the dashboard shows the price); a lookup that finds nothing is not charged.
      *
      * Errors:
-     * - 502 `Upstream error`: The search backend answered with an error. Not charged.
-     * - 504 `timeout error`: The search backend did not answer in time. Not charged.
+     * - 424 `Upstream error`: The search backend answered with an error. Not charged.
+     * - 424 `timeout error`: The search backend did not answer in time. Not charged.
      *
      * Docs: https://docs.osintcat.net/api-reference/endpoint/database-search
      *
@@ -127,9 +133,8 @@ export class BreachClient {
      *
      * @throws {@link OsintCat.UnauthorizedError}
      * @throws {@link OsintCat.ForbiddenError}
+     * @throws {@link OsintCat.FailedDependencyError}
      * @throws {@link OsintCat.TooManyRequestsError}
-     * @throws {@link OsintCat.BadGatewayError}
-     * @throws {@link OsintCat.GatewayTimeoutError}
      *
      * @example
      *     await client.breach.databaseSearch({
@@ -188,15 +193,13 @@ export class BreachClient {
                     throw new OsintCat.UnauthorizedError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 case 403:
                     throw new OsintCat.ForbiddenError(_response.error.body as OsintCat.Error, _response.rawResponse);
-                case 429:
-                    throw new OsintCat.TooManyRequestsError(
+                case 424:
+                    throw new OsintCat.FailedDependencyError(
                         _response.error.body as OsintCat.Error,
                         _response.rawResponse,
                     );
-                case 502:
-                    throw new OsintCat.BadGatewayError(_response.error.body as OsintCat.Error, _response.rawResponse);
-                case 504:
-                    throw new OsintCat.GatewayTimeoutError(
+                case 429:
+                    throw new OsintCat.TooManyRequestsError(
                         _response.error.body as OsintCat.Error,
                         _response.rawResponse,
                     );
@@ -219,7 +222,7 @@ export class BreachClient {
      *
      * Errors:
      * - 404 `No results found`: Nothing was found for the domain.
-     * - 502 `Upstream error`: The search could not be completed; the response carries an `error_id`.
+     * - 424 `Upstream error`: The search could not be completed; the response carries an `error_id`.
      *
      * Docs: https://docs.osintcat.net/api-reference/endpoint/domain
      *
@@ -229,8 +232,8 @@ export class BreachClient {
      * @throws {@link OsintCat.UnauthorizedError}
      * @throws {@link OsintCat.ForbiddenError}
      * @throws {@link OsintCat.NotFoundError}
+     * @throws {@link OsintCat.FailedDependencyError}
      * @throws {@link OsintCat.TooManyRequestsError}
-     * @throws {@link OsintCat.BadGatewayError}
      *
      * @example
      *     await client.breach.domain({
@@ -290,13 +293,16 @@ export class BreachClient {
                     throw new OsintCat.ForbiddenError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 case 404:
                     throw new OsintCat.NotFoundError(_response.error.body as OsintCat.Error, _response.rawResponse);
+                case 424:
+                    throw new OsintCat.FailedDependencyError(
+                        _response.error.body as OsintCat.Error,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new OsintCat.TooManyRequestsError(
                         _response.error.body as OsintCat.Error,
                         _response.rawResponse,
                     );
-                case 502:
-                    throw new OsintCat.BadGatewayError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 default:
                     throw new errors.OsintCatError({
                         statusCode: _response.error.statusCode,

@@ -4,11 +4,11 @@ import type * as core from "../../core/index.js";
 import * as errors from "../../errors/index.js";
 import type * as OsintCat from "../index.js";
 
-export class BadGatewayError extends errors.OsintCatError {
+export class FailedDependencyError extends errors.OsintCatError {
     constructor(body: OsintCat.Error, rawResponse?: core.RawResponse) {
         super({
-            message: "BadGatewayError",
-            statusCode: 502,
+            message: "FailedDependencyError",
+            statusCode: 424,
             body: body,
             rawResponse: rawResponse,
         });
@@ -17,6 +17,6 @@ export class BadGatewayError extends errors.OsintCatError {
             Error.captureStackTrace(this, this.constructor);
         }
 
-        this.name = "BadGatewayError";
+        this.name = "FailedDependencyError";
     }
 }

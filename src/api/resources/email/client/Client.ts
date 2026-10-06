@@ -33,7 +33,7 @@ export class EmailClient {
      * - 400 `USER_AGENT_IDENTITY_REQUIRED`: No purpose given.
      * - 401 `API key required`: No `X-API-KEY` header.
      * - 402 `INSUFFICIENT_BALANCE`: Your balance does not cover the lookup.
-     * - 502 `Provider Error`: The lookup could not be completed. Not charged.
+     * - 424 `Provider Error`: The lookup could not be completed. Not charged.
      *
      * Docs: https://docs.osintcat.net/api-reference/endpoint/email-osint
      *
@@ -44,8 +44,8 @@ export class EmailClient {
      * @throws {@link OsintCat.UnauthorizedError}
      * @throws {@link OsintCat.PaymentRequiredError}
      * @throws {@link OsintCat.ForbiddenError}
+     * @throws {@link OsintCat.FailedDependencyError}
      * @throws {@link OsintCat.TooManyRequestsError}
-     * @throws {@link OsintCat.BadGatewayError}
      *
      * @example
      *     await client.email.lookup({
@@ -112,13 +112,16 @@ export class EmailClient {
                     );
                 case 403:
                     throw new OsintCat.ForbiddenError(_response.error.body as OsintCat.Error, _response.rawResponse);
+                case 424:
+                    throw new OsintCat.FailedDependencyError(
+                        _response.error.body as OsintCat.Error,
+                        _response.rawResponse,
+                    );
                 case 429:
                     throw new OsintCat.TooManyRequestsError(
                         _response.error.body as OsintCat.Error,
                         _response.rawResponse,
                     );
-                case 502:
-                    throw new OsintCat.BadGatewayError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 default:
                     throw new errors.OsintCatError({
                         statusCode: _response.error.statusCode,

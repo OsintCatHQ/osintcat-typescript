@@ -63,6 +63,21 @@ describe("MinecraftClient", () => {
 
         const rawResponseBody = {};
 
+        server.mockEndpoint().get("/api/minecraft").respondWith().statusCode(424).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.minecraft.player({
+                query: "query",
+            });
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
+    });
+
+    test("player (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new OsintCatClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {};
+
         server.mockEndpoint().get("/api/minecraft").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
@@ -169,7 +184,7 @@ describe("MinecraftClient", () => {
             .mockEndpoint()
             .get("/api/minecraft-lookup")
             .respondWith()
-            .statusCode(429)
+            .statusCode(424)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -178,7 +193,7 @@ describe("MinecraftClient", () => {
                 query: "query",
                 type: "username",
             });
-        }).rejects.toThrow(OsintCat.TooManyRequestsError);
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
     });
 
     test("leaks (6)", async () => {
@@ -191,7 +206,7 @@ describe("MinecraftClient", () => {
             .mockEndpoint()
             .get("/api/minecraft-lookup")
             .respondWith()
-            .statusCode(502)
+            .statusCode(429)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -200,7 +215,7 @@ describe("MinecraftClient", () => {
                 query: "query",
                 type: "username",
             });
-        }).rejects.toThrow(OsintCat.BadGatewayError);
+        }).rejects.toThrow(OsintCat.TooManyRequestsError);
     });
 
     test("profile (1)", async () => {
@@ -297,6 +312,27 @@ describe("MinecraftClient", () => {
     });
 
     test("profile (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new OsintCatClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {};
+
+        server
+            .mockEndpoint()
+            .get("/api/minecraft-lookup-v2")
+            .respondWith()
+            .statusCode(424)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.minecraft.profile({
+                username: "username",
+            });
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
+    });
+
+    test("profile (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new OsintCatClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 

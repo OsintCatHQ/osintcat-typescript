@@ -65,6 +65,21 @@ describe("ChessClient", () => {
 
         const rawResponseBody = {};
 
+        server.mockEndpoint().get("/api/chess-osint").respondWith().statusCode(424).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.chess.lookup({
+                query: "query",
+            });
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
+    });
+
+    test("lookup (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new OsintCatClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {};
+
         server.mockEndpoint().get("/api/chess-osint").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
 
         await expect(async () => {

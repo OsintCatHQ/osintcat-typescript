@@ -10,9 +10,13 @@ describe("VinClient", () => {
         const client = new OsintCatClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            Count: 1,
-            Message: "Results returned successfully",
-            Results: [{ Make: "HONDA", Model: "Accord", ModelYear: "2003", VIN: "1HGCM82633A004352" }],
+            VIN: "1HGCM82633A004352",
+            Make: "HONDA",
+            Model: "Accord",
+            ModelYear: "2003",
+            Manufacturer: "AMERICAN HONDA MOTOR CO., INC.",
+            BodyClass: "Coupe",
+            ABS: "",
         };
 
         server.mockEndpoint().get("/api/vin").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -63,6 +67,19 @@ describe("VinClient", () => {
     });
 
     test("query (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new OsintCatClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {};
+
+        server.mockEndpoint().get("/api/vin").respondWith().statusCode(424).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.vin.query();
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
+    });
+
+    test("query (6)", async () => {
         const server = mockServerPool.createServer();
         const client = new OsintCatClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
 

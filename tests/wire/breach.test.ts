@@ -64,6 +64,21 @@ describe("BreachClient", () => {
 
         const rawResponseBody = {};
 
+        server.mockEndpoint().get("/api/breach").respondWith().statusCode(424).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.breach.search({
+                query: "query",
+            });
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
+    });
+
+    test("search (5)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new OsintCatClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {};
+
         server.mockEndpoint().get("/api/breach").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
@@ -159,7 +174,7 @@ describe("BreachClient", () => {
             .mockEndpoint()
             .get("/api/database-search")
             .respondWith()
-            .statusCode(429)
+            .statusCode(424)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -167,7 +182,7 @@ describe("BreachClient", () => {
             return await client.breach.databaseSearch({
                 query: "query",
             });
-        }).rejects.toThrow(OsintCat.TooManyRequestsError);
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
     });
 
     test("databaseSearch (5)", async () => {
@@ -180,7 +195,7 @@ describe("BreachClient", () => {
             .mockEndpoint()
             .get("/api/database-search")
             .respondWith()
-            .statusCode(502)
+            .statusCode(429)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -188,28 +203,7 @@ describe("BreachClient", () => {
             return await client.breach.databaseSearch({
                 query: "query",
             });
-        }).rejects.toThrow(OsintCat.BadGatewayError);
-    });
-
-    test("databaseSearch (6)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new OsintCatClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
-
-        const rawResponseBody = {};
-
-        server
-            .mockEndpoint()
-            .get("/api/database-search")
-            .respondWith()
-            .statusCode(504)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.breach.databaseSearch({
-                query: "query",
-            });
-        }).rejects.toThrow(OsintCat.GatewayTimeoutError);
+        }).rejects.toThrow(OsintCat.TooManyRequestsError);
     });
 
     test("domain (1)", async () => {
@@ -277,13 +271,13 @@ describe("BreachClient", () => {
 
         const rawResponseBody = {};
 
-        server.mockEndpoint().get("/api/domain").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().get("/api/domain").respondWith().statusCode(424).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.breach.domain({
                 query: "query",
             });
-        }).rejects.toThrow(OsintCat.TooManyRequestsError);
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
     });
 
     test("domain (6)", async () => {
@@ -292,12 +286,12 @@ describe("BreachClient", () => {
 
         const rawResponseBody = {};
 
-        server.mockEndpoint().get("/api/domain").respondWith().statusCode(502).jsonBody(rawResponseBody).build();
+        server.mockEndpoint().get("/api/domain").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
             return await client.breach.domain({
                 query: "query",
             });
-        }).rejects.toThrow(OsintCat.BadGatewayError);
+        }).rejects.toThrow(OsintCat.TooManyRequestsError);
     });
 });

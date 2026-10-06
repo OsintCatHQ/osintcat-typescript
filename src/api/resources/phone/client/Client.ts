@@ -29,8 +29,8 @@ export class PhoneClient {
      *
      * Errors:
      * - 400 `phone_*`: The number cannot be a valid phone number; `code` says why (e.g. `phone_too_short`).
-     * - 502 `Upstream provider error`: The lookup could not be completed.
-     * - 504 `The request timed out.`: The lookup took too long.
+     * - 424 `Upstream provider error`: The lookup could not be completed.
+     * - 424 `The request timed out.`: The lookup took too long.
      *
      * Docs: https://docs.osintcat.net/api-reference/endpoint/phone-osint
      *
@@ -40,9 +40,8 @@ export class PhoneClient {
      * @throws {@link OsintCat.BadRequestError}
      * @throws {@link OsintCat.UnauthorizedError}
      * @throws {@link OsintCat.ForbiddenError}
+     * @throws {@link OsintCat.FailedDependencyError}
      * @throws {@link OsintCat.TooManyRequestsError}
-     * @throws {@link OsintCat.BadGatewayError}
-     * @throws {@link OsintCat.GatewayTimeoutError}
      *
      * @example
      *     await client.phone.lookup({
@@ -102,15 +101,13 @@ export class PhoneClient {
                     throw new OsintCat.UnauthorizedError(_response.error.body as OsintCat.Error, _response.rawResponse);
                 case 403:
                     throw new OsintCat.ForbiddenError(_response.error.body as OsintCat.Error, _response.rawResponse);
-                case 429:
-                    throw new OsintCat.TooManyRequestsError(
+                case 424:
+                    throw new OsintCat.FailedDependencyError(
                         _response.error.body as OsintCat.Error,
                         _response.rawResponse,
                     );
-                case 502:
-                    throw new OsintCat.BadGatewayError(_response.error.body as OsintCat.Error, _response.rawResponse);
-                case 504:
-                    throw new OsintCat.GatewayTimeoutError(
+                case 429:
+                    throw new OsintCat.TooManyRequestsError(
                         _response.error.body as OsintCat.Error,
                         _response.rawResponse,
                     );

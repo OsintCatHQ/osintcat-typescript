@@ -125,7 +125,7 @@ describe("InstagramClient", () => {
             .mockEndpoint()
             .get("/api/instagram-resolver")
             .respondWith()
-            .statusCode(429)
+            .statusCode(424)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -133,7 +133,7 @@ describe("InstagramClient", () => {
             return await client.instagram.resolveShareLink({
                 link: "link",
             });
-        }).rejects.toThrow(OsintCat.TooManyRequestsError);
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
     });
 
     test("resolveShareLink (7)", async () => {
@@ -146,7 +146,7 @@ describe("InstagramClient", () => {
             .mockEndpoint()
             .get("/api/instagram-resolver")
             .respondWith()
-            .statusCode(502)
+            .statusCode(429)
             .jsonBody(rawResponseBody)
             .build();
 
@@ -154,6 +154,6 @@ describe("InstagramClient", () => {
             return await client.instagram.resolveShareLink({
                 link: "link",
             });
-        }).rejects.toThrow(OsintCat.BadGatewayError);
+        }).rejects.toThrow(OsintCat.TooManyRequestsError);
     });
 });

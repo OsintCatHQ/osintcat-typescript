@@ -87,6 +87,21 @@ describe("TwitchClient", () => {
 
         const rawResponseBody = {};
 
+        server.mockEndpoint().get("/api/twitch").respondWith().statusCode(424).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.twitch.profile({
+                username: "username",
+            });
+        }).rejects.toThrow(OsintCat.FailedDependencyError);
+    });
+
+    test("profile (6)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new OsintCatClient({ maxRetries: 0, apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {};
+
         server.mockEndpoint().get("/api/twitch").respondWith().statusCode(429).jsonBody(rawResponseBody).build();
 
         await expect(async () => {
