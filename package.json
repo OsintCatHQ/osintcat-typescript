@@ -3,224 +3,27 @@
     "version": "2.0.0",
     "private": false,
     "type": "commonjs",
-    "main": "./dist/cjs/index.js",
-    "module": "./dist/esm/index.mjs",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.mjs",
     "types": "./dist/cjs/index.d.ts",
     "exports": {
         ".": {
             "import": {
                 "types": "./dist/esm/index.d.mts",
-                "default": "./dist/esm/index.mjs"
+                "default": "./dist/index.mjs"
             },
             "require": {
                 "types": "./dist/cjs/index.d.ts",
-                "default": "./dist/cjs/index.js"
-            },
-            "default": "./dist/cjs/index.js"
-        },
-        "./account": {
-            "import": {
-                "types": "./dist/esm/api/resources/account/exports.d.mts",
-                "default": "./dist/esm/api/resources/account/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/account/exports.d.ts",
-                "default": "./dist/cjs/api/resources/account/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/account/exports.js"
-        },
-        "./breach": {
-            "import": {
-                "types": "./dist/esm/api/resources/breach/exports.d.mts",
-                "default": "./dist/esm/api/resources/breach/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/breach/exports.d.ts",
-                "default": "./dist/cjs/api/resources/breach/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/breach/exports.js"
-        },
-        "./email": {
-            "import": {
-                "types": "./dist/esm/api/resources/email/exports.d.mts",
-                "default": "./dist/esm/api/resources/email/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/email/exports.d.ts",
-                "default": "./dist/cjs/api/resources/email/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/email/exports.js"
-        },
-        "./phone": {
-            "import": {
-                "types": "./dist/esm/api/resources/phone/exports.d.mts",
-                "default": "./dist/esm/api/resources/phone/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/phone/exports.d.ts",
-                "default": "./dist/cjs/api/resources/phone/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/phone/exports.js"
-        },
-        "./ip": {
-            "import": {
-                "types": "./dist/esm/api/resources/ip/exports.d.mts",
-                "default": "./dist/esm/api/resources/ip/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/ip/exports.d.ts",
-                "default": "./dist/cjs/api/resources/ip/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/ip/exports.js"
-        },
-        "./dns": {
-            "import": {
-                "types": "./dist/esm/api/resources/dns/exports.d.mts",
-                "default": "./dist/esm/api/resources/dns/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/dns/exports.d.ts",
-                "default": "./dist/cjs/api/resources/dns/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/dns/exports.js"
-        },
-        "./minecraft": {
-            "import": {
-                "types": "./dist/esm/api/resources/minecraft/exports.d.mts",
-                "default": "./dist/esm/api/resources/minecraft/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/minecraft/exports.d.ts",
-                "default": "./dist/cjs/api/resources/minecraft/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/minecraft/exports.js"
-        },
-        "./steam": {
-            "import": {
-                "types": "./dist/esm/api/resources/steam/exports.d.mts",
-                "default": "./dist/esm/api/resources/steam/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/steam/exports.d.ts",
-                "default": "./dist/cjs/api/resources/steam/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/steam/exports.js"
-        },
-        "./xbox": {
-            "import": {
-                "types": "./dist/esm/api/resources/xbox/exports.d.mts",
-                "default": "./dist/esm/api/resources/xbox/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/xbox/exports.d.ts",
-                "default": "./dist/cjs/api/resources/xbox/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/xbox/exports.js"
-        },
-        "./twitch": {
-            "import": {
-                "types": "./dist/esm/api/resources/twitch/exports.d.mts",
-                "default": "./dist/esm/api/resources/twitch/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/twitch/exports.d.ts",
-                "default": "./dist/cjs/api/resources/twitch/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/twitch/exports.js"
-        },
-        "./chess": {
-            "import": {
-                "types": "./dist/esm/api/resources/chess/exports.d.mts",
-                "default": "./dist/esm/api/resources/chess/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/chess/exports.d.ts",
-                "default": "./dist/cjs/api/resources/chess/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/chess/exports.js"
-        },
-        "./github": {
-            "import": {
-                "types": "./dist/esm/api/resources/github/exports.d.mts",
-                "default": "./dist/esm/api/resources/github/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/github/exports.d.ts",
-                "default": "./dist/cjs/api/resources/github/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/github/exports.js"
-        },
-        "./reddit": {
-            "import": {
-                "types": "./dist/esm/api/resources/reddit/exports.d.mts",
-                "default": "./dist/esm/api/resources/reddit/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/reddit/exports.d.ts",
-                "default": "./dist/cjs/api/resources/reddit/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/reddit/exports.js"
-        },
-        "./x": {
-            "import": {
-                "types": "./dist/esm/api/resources/x/exports.d.mts",
-                "default": "./dist/esm/api/resources/x/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/x/exports.d.ts",
-                "default": "./dist/cjs/api/resources/x/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/x/exports.js"
-        },
-        "./tiktok": {
-            "import": {
-                "types": "./dist/esm/api/resources/tiktok/exports.d.mts",
-                "default": "./dist/esm/api/resources/tiktok/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/tiktok/exports.d.ts",
-                "default": "./dist/cjs/api/resources/tiktok/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/tiktok/exports.js"
-        },
-        "./instagram": {
-            "import": {
-                "types": "./dist/esm/api/resources/instagram/exports.d.mts",
-                "default": "./dist/esm/api/resources/instagram/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/instagram/exports.d.ts",
-                "default": "./dist/cjs/api/resources/instagram/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/instagram/exports.js"
-        },
-        "./vin": {
-            "import": {
-                "types": "./dist/esm/api/resources/vin/exports.d.mts",
-                "default": "./dist/esm/api/resources/vin/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/vin/exports.d.ts",
-                "default": "./dist/cjs/api/resources/vin/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/vin/exports.js"
-        },
-        "./chile": {
-            "import": {
-                "types": "./dist/esm/api/resources/chile/exports.d.mts",
-                "default": "./dist/esm/api/resources/chile/exports.mjs"
-            },
-            "require": {
-                "types": "./dist/cjs/api/resources/chile/exports.d.ts",
-                "default": "./dist/cjs/api/resources/chile/exports.js"
-            },
-            "default": "./dist/cjs/api/resources/chile/exports.js"
+                "default": "./dist/index.cjs"
+            }
         },
         "./package.json": "./package.json"
     },
     "files": [
-        "dist",
-        "reference.md",
+        "dist/index.mjs",
+        "dist/index.cjs",
+        "dist/cjs/**/*.d.ts",
+        "dist/esm/**/*.d.mts",
         "README.md",
         "LICENSE"
     ],
@@ -231,12 +34,11 @@
         "lint:fix": "biome lint --fix --unsafe --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
         "check": "biome check --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
         "check:fix": "biome check --fix --unsafe --skip-parse-errors --no-errors-on-unmatched --max-diagnostics=none",
-        "build": "pnpm build:cjs && pnpm build:esm",
-        "build:cjs": "tsc --project ./tsconfig.cjs.json",
-        "build:esm": "tsc --project ./tsconfig.esm.json && node scripts/rename-to-esm-files.js dist/esm",
+        "build": "tsup && tsc -p tsconfig.cjs.json --emitDeclarationOnly && tsc -p tsconfig.esm.json --emitDeclarationOnly && node scripts/rename-to-esm-files.js dist/esm",
         "test": "vitest",
         "test:unit": "vitest --project unit",
-        "test:wire": "vitest --project wire"
+        "test:wire": "vitest --project wire",
+        "prepublishOnly": "node -e \"if(!process.env.OSINTCAT_RELEASE){console.error('Publish with build.ps1 -Publish');process.exit(1)}\""
     },
     "dependencies": {},
     "devDependencies": {
@@ -246,7 +48,8 @@
         "msw": "2.11.2",
         "@types/node": "^20.0.0",
         "typescript": "~5.9.3",
-        "@biomejs/biome": "2.4.10"
+        "@biomejs/biome": "2.4.10",
+        "tsup": "8.5.1"
     },
     "browser": {
         "fs": false,
@@ -264,11 +67,6 @@
     "license": "MIT",
     "author": "OsintCat <support@osintcat.net>",
     "homepage": "https://docs.osintcat.net",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/OsintCatHQ/OsintCat.js.git"
-    },
-    "bugs": "https://github.com/OsintCatHQ/OsintCat.js/issues",
     "keywords": [
         "osintcat",
         "osint",

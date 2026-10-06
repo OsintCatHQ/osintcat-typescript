@@ -10,11 +10,6 @@
             "license": "MIT",
             "author": "OsintCat <support@osintcat.net>",
             "homepage": "https://docs.osintcat.net",
-            "repository": {
-                "type": "git",
-                "url": "git+https://github.com/OsintCatHQ/OsintCat.js.git"
-            },
-            "bugs": "https://github.com/OsintCatHQ/OsintCat.js/issues",
             "keywords": ["osintcat", "osint", "api", "sdk"]
         },
         "skipResponseValidation": true,
@@ -23,7 +18,7 @@
         "maxRetries": 0,
         "defaultTimeout": 60000
     },
-    "originGitCommit": "68eeafea01d0aae1b63214b62248e790a0e9242b",
+    "originGitCommit": "cdbee9e35547ae2cfd12671f5d490e464c8b5f46",
     "originGitCommitIsDirty": true,
     "invokedBy": "manual",
     "requestedVersion": "2.0.0",
